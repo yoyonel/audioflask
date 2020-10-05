@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "audioflask"
+version = "0.1.0"
+description = ""
+authors = ["ATTY Lionel <lionel.atty@365talents.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+PyAudio = "^0.2.11"
+scipy = "^1.5.2"
+Flask = "^1.1.2"
+Flask-Cors = "^3.0.9"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

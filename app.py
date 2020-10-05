@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template, Response, stream_with_context
+from flask_cors import CORS,cross_origin
 
 # AUDIO imports
 import pyaudio
@@ -7,13 +8,16 @@ import numpy as np
 from scipy.fftpack import fft
 
 app = Flask(__name__)
+# https://stackoverflow.com/questions/26980713/solve-cross-origin-resource-sharing-with-flask
+# - https://stackoverflow.com/a/56542876
+CORS(app, support_credentials=True)
 
 # AUDIO: constants
 CHUNK = 1024 * 2  # samples per frame
 FORMAT = pyaudio.paInt16  # audio format (bytes per sample?)
 CHANNELS = 1  # single channel for microphone
 RATE = 44100  # samples per second
-DEVICE_INDEX = 1
+DEVICE_INDEX = 3
 
 p = pyaudio.PyAudio()
 
@@ -39,7 +43,7 @@ stream = p.open(
     rate=RATE,
     input=True,
     output=True,
-    #input_device_index=DEVICE_INDEX,
+    # input_device_index=DEVICE_INDEX,
     frames_per_buffer=CHUNK
 )
 
@@ -54,6 +58,7 @@ def wavefeed():
     return Response(get_sound_wave(), mimetype="text/plain")
 
 @app.route('/spectrumfeed')
+@cross_origin(supports_credentials=True)
 def spectrumfeed():
     return Response(get_sound_freq(), mimetype="text/plain")
 

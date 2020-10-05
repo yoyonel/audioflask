@@ -13,7 +13,7 @@ Highcharts.chart('container-spectrum', {
                 var series = this.series[0];
                 setInterval(function() {
                     $.getJSON('http://localhost:5000/spectrumfeed', function(data) {
-                        //console.log(data)
+                        console.log(data)
                         // set the series data
                         series.setData(data);
 

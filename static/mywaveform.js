@@ -13,7 +13,7 @@ Highcharts.chart('container-waveform', {
                 var series = this.series[0];
                 setInterval(function() {
                     $.getJSON('http://localhost:5000/wavefeed', function(data) {
-                        //console.log(data)
+                        console.log(data)
                         series.setData(data);
                         //analyze(data);
                     });
